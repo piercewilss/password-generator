@@ -4,14 +4,14 @@
 // Get references to the #generate element
 var generateBtn = document.querySelector("#generate");
 
-var lowerCase = ['a', 'b'];
-var upperCase = ['A', 'B', 'C'];
-var numeric = [1, 2, 3, 4];
-var specChar = ['@', '!'];
+var lowerCase = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w','x', 'y', 'z'];
+var upperCase = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'J', 'K', 'L', 'M', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'];
+var numeric = [1, 2, 3, 4, 5, 6, 7, 8, 9, 0];
+var specChar = ['@', '!', '#', '$', '%', '^', '&', '*', '(', ')' ];
 
 // take in user info -- based on the user answers
 function userInfo() {
-  var length = parseInt (prompt("How many characters do you want your password to be?"));
+  var length = parseInt(prompt("How many characters do you want your password to be?"));
   console.log(length);
 
   if (Number.isNaN(length)) {
@@ -40,15 +40,17 @@ function userInfo() {
     isUpperCase: isUpperCase,
     isNumeric: isNumeric,
     isSpecChar: isSpecChar
-  }
+  } 
+  console.log(userObj)
   return userObj;
 }
 
 // userInfio
 function randomizer(arr) {
-  var rIndex = Math.random * arr.length;
+  var rIndex = Math.floor(Math.random() * arr.length);
   var character = arr[rIndex];
   return character;
+  generatePassword()
 }
 
 function generatePassword() {
@@ -57,12 +59,42 @@ function generatePassword() {
     var potential = [];
     var result = [];
 
-    if (isLowerCase) {
-      var potential = potential.concat(lowercase);
+    if (userOptions.isLowerCase) {
+      potential = potential.concat(lowerCase);
       console.log(potential);
-      guarantee.push(randomizer(lowercase))
+      guarantee.push(randomizer(lowerCase))
     }
+    if (userOptions.isUpperCase) {
+      potential = potential.concat(upperCase);
+      console.log(potential);
+      guarantee.push(randomizer(upperCase))
+    }
+    if (userOptions.isNumeric) {
+      potential = potential.concat(numeric);
+      console.log(potential);
+      guarantee.push(randomizer(numeric))
+    }
+    if (userOptions.isSpecChar) {
+      potential = potential.concat(specChar);
+      console.log(potential);
+      guarantee.push(randomizer(specChar))
+    }
+    for (var i = 0; i < userOptions.length; i++) {
+      var potential = randomizer(potential);
+      result.push(potential)
+      
+      
+      
+    } 
+for (var i=0; i < guarantee.length; i++) {
+  result[i]= guarantee[i]
 }
+
+
+    return result.join("")
+    
+} 
+
 // Write password to the #password input
 function writePassword() {
   var password = generatePassword();
