@@ -50,7 +50,7 @@ function randomizer(arr) {
   var rIndex = Math.floor(Math.random() * arr.length);
   var character = arr[rIndex];
   return character;
-  generatePassword()
+  
 }
 
 function generatePassword() {
